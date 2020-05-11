@@ -86,6 +86,9 @@ class UploadImageFragment internal constructor() : Fragment() {
         }?.sortedDescending()?.toMutableList() ?: mutableListOf()
 
         val savedUri =  Uri.fromFile(rootDirectory)
+
+        Toast.makeText(requireContext(),"File Uri: $savedUri",Toast.LENGTH_SHORT).show()
+
         when(savedUri != null){
             true -> uploadImage(savedUri)
             false -> Toast.makeText(context, R.string.error_pick_image, Toast.LENGTH_LONG).show()
