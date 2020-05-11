@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/permissionsFragment">
+
+    <fragment
+        android:id="@+id/permissionsFragment"
+        android:name="com.appruve.cameraapp.ui.permissions.PermissionsFragment"
+        android:label="PermissionsFragment" >
+        <action
+            android:id="@+id/action_permissionsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/uploadImageFragment"
+        android:name="com.appruve.cameraapp.ui.upload.UploadImageFragment"
+        android:label="UploadImageFragment" >
+        <argument
+            android:name="image_path"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.appruve.cameraapp.ui.main.MainFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_uploadImageFragment"
+            app:destination="@id/uploadImageFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_permissionsFragment"
+            app:destination="@id/permissionsFragment" />
+    </fragment>
+</navigation>

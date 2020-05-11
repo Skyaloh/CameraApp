@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CameraApp</string>
+    <string name="capture_button_alt">Capture</string>
+    <string name="switch_camera_button_alt">Switch camera</string>
+    <string name="back_button_alt">Back</string>
+    <string name="error_general_network">Couldn\'t complete your request. Try Again</string>
+    <string name="action_resend"><u>Resend</u></string>
+    <string name="error_pick_image">Pick Image to continue</string>
+</resources>
