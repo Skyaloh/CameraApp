@@ -187,7 +187,7 @@ class MainFragment : Fragment() {
                 .setTargetRotation(rotation)
                 .build()
 
-            // ImageAnalysis
+            
             imageAnalyzer = ImageAnalysis.Builder()
 
                 .setTargetAspectRatio(screenAspectRatio)
