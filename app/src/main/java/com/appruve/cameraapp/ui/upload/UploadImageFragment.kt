@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.ViewPager
@@ -65,6 +66,7 @@ class UploadImageFragment internal constructor() : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        viewModel = ViewModelProvider(this,viewModelFactory).get(ServiceViewModel::class.java)
 
         retainInstance = true
 
@@ -116,7 +118,7 @@ class UploadImageFragment internal constructor() : Fragment() {
                 loading = false
                 when(it.status){
                     Status.LOADING -> loading = true
-                    Status.SUCCESS -> Toast.makeText(requireContext(),"Uploaded Successfully",Toast.LENGTH_LONG).show()
+                    Status.SUCCESS -> Toast.makeText(requireContext(),"Uploaded Successfully!",Toast.LENGTH_LONG).show()
                     Status.FAILED -> handleNetworkError(it)
                 }
             })

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.appruve.cameraapp.BuildConfig
+import com.appruve.cameraapp.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -34,7 +35,7 @@ class BaseApplication : Application(), LifecycleObserver, HasActivityInjector,
             Timber.plant(Timber.DebugTree())
         }
 
-       // DaggerAppComponent.builder().application(this).build().inject(this)
+        DaggerAppComponent.builder().application(this).build().inject(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
     }
 
