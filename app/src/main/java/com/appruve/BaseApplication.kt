@@ -8,22 +8,22 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.appruve.cameraapp.BuildConfig
 import com.appruve.cameraapp.di.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import dagger.android.HasServiceInjector
+import dagger.android.*
 import dagger.android.support.HasSupportFragmentInjector
 import timber.log.Timber
 import javax.inject.Inject
 
 class BaseApplication : Application(), LifecycleObserver, HasActivityInjector,
-    HasSupportFragmentInjector, HasServiceInjector {
+    HasSupportFragmentInjector, HasFragmentInjector, HasServiceInjector {
 
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>
 
     @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var supportFragmentInjector: DispatchingAndroidInjector<Fragment>
+
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<android.app.Fragment>
 
     @Inject
     lateinit var serviceInjector: DispatchingAndroidInjector<Service>
@@ -41,7 +41,9 @@ class BaseApplication : Application(), LifecycleObserver, HasActivityInjector,
 
     override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
-    override fun supportFragmentInjector(): AndroidInjector<androidx.fragment.app.Fragment> = fragmentInjector
+    override fun supportFragmentInjector(): AndroidInjector<androidx.fragment.app.Fragment> = supportFragmentInjector
+
+    override fun fragmentInjector(): AndroidInjector<android.app.Fragment> = fragmentInjector
 
     override fun serviceInjector(): AndroidInjector<Service> = serviceInjector
 
