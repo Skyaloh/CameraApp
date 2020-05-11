@@ -1,4 +1,4 @@
-package ke.co.kazi.di
+package com.appruve.cameraapp.di
 
 import android.app.Application
 import com.appruve.cameraapp.AppExecutors

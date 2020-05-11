@@ -1,4 +1,4 @@
-package ke.co.kazi.di
+package com.appruve.cameraapp.di
 
 import com.appruve.cameraapp.api.Webservice
 import com.appruve.cameraapp.utils.BASE_URL

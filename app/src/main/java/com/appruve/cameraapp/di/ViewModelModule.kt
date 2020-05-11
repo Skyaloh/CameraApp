@@ -1,4 +1,4 @@
-package ke.co.kazi.di
+package com.appruve.cameraapp.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

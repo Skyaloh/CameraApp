@@ -1,10 +1,11 @@
-package ke.co.kazi.di
+package com.appruve.cameraapp.di
 
 import android.app.Application
 import com.appruve.BaseApplication
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
+
 import javax.inject.Singleton
 
 @Singleton

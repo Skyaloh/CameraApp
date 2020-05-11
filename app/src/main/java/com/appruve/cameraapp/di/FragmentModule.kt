@@ -1,4 +1,4 @@
-package ke.co.kazi.di
+package com.appruve.cameraapp.di
 
 import com.appruve.cameraapp.ui.upload.UploadImageFragment
 import dagger.Module

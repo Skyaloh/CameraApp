@@ -8,13 +8,25 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.appruve.cameraapp.BuildConfig
 import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.HasServiceInjector
 import dagger.android.support.HasSupportFragmentInjector
 import timber.log.Timber
+import javax.inject.Inject
 
 class BaseApplication : Application(), LifecycleObserver, HasActivityInjector,
     HasSupportFragmentInjector, HasServiceInjector {
+
+    @Inject
+    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+
+    @Inject
+    lateinit var serviceInjector: DispatchingAndroidInjector<Service>
+
 
     override fun onCreate() {
         super.onCreate()
@@ -22,19 +34,15 @@ class BaseApplication : Application(), LifecycleObserver, HasActivityInjector,
             Timber.plant(Timber.DebugTree())
         }
 
-      //  DaggerAppComponent.builder().application(this).build().inject(this)
+       // DaggerAppComponent.builder().application(this).build().inject(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
     }
-    override fun activityInjector(): AndroidInjector<Activity> {
-        TODO("Not yet implemented")
-    }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        TODO("Not yet implemented")
-    }
+    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
-    override fun serviceInjector(): AndroidInjector<Service> {
-        TODO("Not yet implemented")
-    }
+    override fun supportFragmentInjector(): AndroidInjector<androidx.fragment.app.Fragment> = fragmentInjector
+
+    override fun serviceInjector(): AndroidInjector<Service> = serviceInjector
+
 
 }

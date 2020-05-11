@@ -108,8 +108,6 @@ class UploadImageFragment internal constructor() : Fragment() {
         super.onAttach(context)
     }
 
-
-
     private fun uploadImage(uri: Uri) {
 
         viewModel.uploadServiceImage(generateRandomUsername(),

@@ -164,7 +164,7 @@ class MainFragment : Fragment() {
 
         val rotation = viewFinder.display.rotation
 
-        // Bind the CameraProvider to the LifeCycleOwner
+
         val cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener(Runnable {
@@ -174,37 +174,30 @@ class MainFragment : Fragment() {
 
             // Preview
             preview = Preview.Builder()
-                // We request aspect ratio but no resolution
                 .setTargetAspectRatio(screenAspectRatio)
-                // Set initial target rotation
                 .setTargetRotation(rotation)
                 .build()
 
             // ImageCapture
             imageCapture = ImageCapture.Builder()
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-                // We request aspect ratio but no resolution to match preview config, but letting
-                // CameraX optimize for whatever specific resolution best fits our use cases
+
                 .setTargetAspectRatio(screenAspectRatio)
-                // Set initial target rotation, we will have to call this again if rotation changes
-                // during the lifecycle of this use case
+
                 .setTargetRotation(rotation)
                 .build()
 
             // ImageAnalysis
             imageAnalyzer = ImageAnalysis.Builder()
-                // We request aspect ratio but no resolution
+
                 .setTargetAspectRatio(screenAspectRatio)
-                // Set initial target rotation, we will have to call this again if rotation changes
-                // during the lifecycle of this use case
+
                 .setTargetRotation(rotation)
                 .build()
                 // The analyzer can then be assigned to the instance
                 .also {
                     it.setAnalyzer(cameraExecutor, LuminosityAnalyzer { luma ->
-                        // Values returned from our analyzer are passed to the attached listener
-                        // We log image analysis results here - you should do something useful
-                        // instead!
+
                         Log.d(TAG, "Average luminosity: $luma")
                     })
                 }
