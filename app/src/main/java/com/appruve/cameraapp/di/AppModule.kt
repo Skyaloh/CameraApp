@@ -17,5 +17,4 @@ class AppModule {
     @Provides
     fun providesServiceRepository(webservice: Webservice, appExecutors: AppExecutors): ServiceRepository = ServiceRepository( webservice, appExecutors)
 
-
 }

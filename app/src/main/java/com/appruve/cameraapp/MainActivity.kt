@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.appruve.cameraapp.ui.main.MainFragment
 import com.appruve.cameraapp.ui.utils.FLAGS_FULLSCREEN
+import dagger.android.AndroidInjection
 import java.io.File
 
 const val KEY_EVENT_ACTION = "key_event_action"
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var container: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         container = findViewById(R.id.fragment_container)

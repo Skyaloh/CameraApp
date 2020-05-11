@@ -1,4 +1,4 @@
-package ke.co.kazi.di.scopes
+package com.appruve.cameraapp.di.scopes
 
 import javax.inject.Scope
 

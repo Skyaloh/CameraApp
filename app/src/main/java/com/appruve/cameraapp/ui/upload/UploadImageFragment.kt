@@ -41,6 +41,7 @@ class UploadImageFragment internal constructor() : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
     protected lateinit var viewModel: ServiceViewModel
 
     private val args: UploadImageFragmentArgs by navArgs()
@@ -62,6 +63,14 @@ class UploadImageFragment internal constructor() : Fragment() {
         override fun getItem(position: Int): Fragment = PhotoFragment.create(mediaList[position])
         override fun getItemPosition(obj: Any): Int = POSITION_NONE
     }
+
+
+
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,11 +112,6 @@ class UploadImageFragment internal constructor() : Fragment() {
             Navigation.findNavController(requireActivity(), R.id.fragment_container).navigateUp()
         }
 
-    }
-
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
     }
 
     private fun uploadImage(uri: Uri) {
