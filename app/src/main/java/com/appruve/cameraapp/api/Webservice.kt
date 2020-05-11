@@ -10,5 +10,5 @@ import retrofit2.http.Part
 interface Webservice{
     @Multipart
     @POST("v1/verifications/test/file_upload")
-    fun uploadServiceImage(@Part serviceId: MultipartBody.Part, @Part photo: MultipartBody.Part): LiveData<ApiResponse<Response<Unit>>>
+    fun uploadServiceImage(@Part user_id: MultipartBody.Part, @Part document: MultipartBody.Part): LiveData<ApiResponse<Response<Unit>>>
 }

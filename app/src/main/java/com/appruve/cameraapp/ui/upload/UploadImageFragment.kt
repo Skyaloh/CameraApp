@@ -50,7 +50,7 @@ class UploadImageFragment internal constructor() : Fragment() {
 
     private var loading: Boolean = false
         set(value) {
-            progressBar.visibility = when(loading){
+            loadingLayout.visibility = when(loading){
                 true -> View.VISIBLE
                 false -> View.GONE
             }
@@ -79,15 +79,13 @@ class UploadImageFragment internal constructor() : Fragment() {
 
         retainInstance = true
 
-        val rootDirectory = File(args.imagePath)
+        val rootDirectory = File(args.imagePath+"/"+args.fileName)
 
         mediaList = rootDirectory.listFiles { file ->
             EXTENSION_WHITELIST.contains(file.extension.toUpperCase(Locale.ROOT))
         }?.sortedDescending()?.toMutableList() ?: mutableListOf()
 
         val savedUri =  Uri.fromFile(rootDirectory)
-
-        Toast.makeText(requireContext(),"File Uri: $savedUri",Toast.LENGTH_SHORT).show()
 
         when(savedUri != null){
             true -> uploadImage(savedUri)
@@ -119,6 +117,7 @@ class UploadImageFragment internal constructor() : Fragment() {
 
     private fun uploadImage(uri: Uri) {
 
+       // Toast.makeText(requireContext(),"$uri",Toast.LENGTH_LONG).show()
         viewModel.uploadServiceImage(generateRandomUsername(),
             FileUploadUtil.prepareFilePart("document", File(uri.path), requireContext()))
             .observe(this, androidx.lifecycle.Observer {

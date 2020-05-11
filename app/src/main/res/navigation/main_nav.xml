@@ -20,6 +20,9 @@
         <argument
             android:name="image_path"
             app:argType="string" />
+        <argument
+            android:name="file_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"

@@ -8,6 +8,7 @@ import com.appruve.cameraapp.api.models.Response
 import com.appruve.cameraapp.vo.NetworkOnlyResource
 import com.appruve.cameraapp.vo.Resource
 import okhttp3.MultipartBody
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,6 +16,7 @@ import javax.inject.Singleton
 class ServiceRepository @Inject constructor( val webservice: Webservice, val appExecutors: AppExecutors)  {
 
     fun uploadServiceImage(userId: String, photo: MultipartBody.Part): LiveData<Resource<Unit>> {
+
         return object : NetworkOnlyResource<Unit, Response<Unit>>(appExecutors) {
             override fun processResult(item: Response<Unit>?): Unit? = item?.data
 

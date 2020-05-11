@@ -273,7 +273,7 @@ class MainFragment : Fragment() {
                                     Navigation.findNavController(
                                         requireActivity(), R.id.fragment_container
                                     ).navigate(MainFragmentDirections
-                                        .actionMainFragmentToUploadImageFragment(outputDirectory.absolutePath))
+                                        .actionMainFragmentToUploadImageFragment(outputDirectory.absolutePath,photoFile.name))
                                 }
 
                             }
@@ -386,7 +386,7 @@ class MainFragment : Fragment() {
 
     companion object {
 
-        private const val TAG = "CameraXBasic"
+        private const val TAG = "MainFragment_"
         private const val FILENAME = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val PHOTO_EXTENSION = ".jpg"
         private const val RATIO_4_3_VALUE = 4.0 / 3.0

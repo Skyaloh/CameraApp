@@ -1,5 +1,6 @@
 package com.appruve.cameraapp.api
 
+import android.util.Log
 import com.appruve.cameraapp.api.models.data.Message
 import retrofit2.Response
 import timber.log.Timber
@@ -12,6 +13,8 @@ sealed class ApiResponse<T> {
         const val ERROR_CODE: String = "1"
 
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
+
+
             return ApiErrorResponse(Message("Server Error", error.message ?: "unknown error"))
         }
 
@@ -20,9 +23,16 @@ sealed class ApiResponse<T> {
                 response.isSuccessful -> {
                     val body = response.body()
                     val messageBody = body as? com.appruve.cameraapp.api.models.Response<T>
+                    val responseCode = response.code()
+                    Timber.d("_ResponseCode_ $responseCode")
                     when {
+
                         body == null || response.code() == 204 -> ApiEmptyResponse()
-                        messageBody !== null && messageBody.statusCode == ERROR_CODE -> ApiErrorResponse(body.message)
+                        body == null || response.code() == 200 -> ApiSuccessResponse(
+                            body = body,
+                            linkHeader = response.headers()?.get("link")
+                        )
+                       // messageBody !== null && messageBody.statusCode == ERROR_CODE -> ApiErrorResponse(body.message)
                         else -> ApiSuccessResponse(
                             body = body,
                             linkHeader = response.headers()?.get("link")
@@ -36,6 +46,8 @@ sealed class ApiResponse<T> {
                         msg.isNullOrEmpty() -> response.message()
                         else -> msg
                     }
+
+
                     ApiErrorResponse(Message("Server Error", errorMsg ?: "unknown error"))
                 }
             }
